@@ -8,6 +8,12 @@ export interface Route extends Document {
   duration: number;
   distance: number;
   location: string;
-  lat: string;
-  lng: string;
+  origin: {
+    lat: string;
+    lng: string;
+  };
+  destination: {
+    lat: string;
+    lng: string;
+  };
 }

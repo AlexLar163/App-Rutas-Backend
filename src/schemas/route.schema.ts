@@ -9,6 +9,12 @@ export const routeSchema = new Schema({
   duration: Number,
   distance: Number,
   location: String,
-  lat: String,
-  lng: String,
+  origin: {
+    lat: String,
+    lng: String,
+  },
+  destination: {
+    lat: String,
+    lng: String,
+  },
 });

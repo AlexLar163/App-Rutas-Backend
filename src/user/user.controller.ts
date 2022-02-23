@@ -18,18 +18,18 @@ export class UserController {
   registerUser(@Body() body: CreateUserDTO): Promise<User> {
     return this.userService.registerUser(body);
   }
-  @Post('/favorites')
-  favorites(@Body() body: CreateFavoriteUserDTO): Promise<User> {
+  @Post('/addfavorites')
+  favorites(@Body() body): Promise<User> {
     try {
       return this.userService.favoritesUser(body);
     } catch (err) {
       throw err;
     }
   }
-  @Get('/favorites')
-  getFavorites(): Promise<object> {
+  @Post('/getfavorites')
+  getFavorites(@Body() body: Object): Promise<object> {
     try {
-      return this.userService.getFavoritesUser();
+      return this.userService.getFavoritesUser(body);
     } catch (err) {
       throw err;
     }

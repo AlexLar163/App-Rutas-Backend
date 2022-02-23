@@ -1,5 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { CreateFavoriteUserDTO, CreateUserDTO, LoginUserDTO } from 'src/dto/user.dto';
+import {
+  CreateFavoriteUserDTO,
+  CreateUserDTO,
+  LoginUserDTO,
+} from 'src/dto/user.dto';
 import { User } from '../interface/User';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
@@ -8,7 +12,10 @@ import { InjectModel } from '@nestjs/mongoose';
 export class UserService {
   constructor(@InjectModel('Users') private userModel: Model<User>) {}
   async loginUser(Body: LoginUserDTO): Promise<User> {
-    return await this.userModel.findOne({ name: Body.name, password: Body.password },'name email');
+    return await this.userModel.findOne(
+      { username: Body.username, password: Body.password },
+      'username email',
+    );
   }
   async registerUser(body: CreateUserDTO): Promise<User> {
     return await this.userModel.create(body);
@@ -18,7 +25,7 @@ export class UserService {
       $push: { favorites: body.favorites },
     });
   }
-  async getFavoritesUser(): Promise<object> {
-    return await this.userModel.find();
+  async getFavoritesUser(id): Promise<object> {
+    return await this.userModel.findById(id, 'favorites');
   }
 }

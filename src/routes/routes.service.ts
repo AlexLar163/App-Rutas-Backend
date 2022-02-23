@@ -10,7 +10,17 @@ export class RoutesService {
   async getAllRoutes(): Promise<object> {
     return await this.routesModel.find();
   }
+  async getDifficultRoutes(difficulty): Promise<object> {
+    return await this.routesModel.find({ difficulty: difficulty });
+  }
+
   async createRoute(body: createRouteDTO): Promise<object> {
     return await this.routesModel.create(body);
+  }
+  async getOneRoute(body: createRouteDTO): Promise<object> {
+    return await this.routesModel.findById(body);
+  }
+  async getSearchRoutes(body: createRouteDTO): Promise<object> {
+    return await this.routesModel.find({ name: body.name }).exec();
   }
 }
